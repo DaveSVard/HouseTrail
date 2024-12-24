@@ -2,18 +2,22 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import images from "@/constants/images";
 import icons from "@/constants/icons";
+import { Models } from "react-native-appwrite";
 
 interface ICard {
+  item: Models.Document;
   onPress?: () => void;
 }
 
-export const FeaturedCard = ({ onPress }: ICard) => {
+export const FeaturedCard = ({ item, onPress }: ICard) => {
+  const { rating, name, address, image, price } = item;
+
   return (
     <TouchableOpacity
       onPress={onPress}
       className="flex flex-col items-start w-60 h-80 relative"
     >
-      <Image source={images.japan} className="size-full rounded-2xl" />
+      <Image source={{ uri: image }} className="size-full rounded-2xl" />
       <Image
         source={images.cardGradient}
         className="size-full rounded-2xl absolute bottom-0"
@@ -22,7 +26,7 @@ export const FeaturedCard = ({ onPress }: ICard) => {
       <View className="flex flex-row items-center bg-white/90 px-3 py-1.5 rounded-full absolute top-5 right-5 ">
         <Image source={icons.star} className="size-3.5" />
         <Text className="font-rubik-bold text-xs text-primary-300 ml-1">
-          4.4
+          {rating}
         </Text>
       </View>
 
@@ -31,15 +35,13 @@ export const FeaturedCard = ({ onPress }: ICard) => {
           className="font-rubik-extrabold text-xl text-white"
           numberOfLines={1}
         >
-          Modern Apartment
+          {name}
         </Text>
-        <Text className="font-rubik text-base text-white">
-          22 W 15th St, New York
-        </Text>
+        <Text className="font-rubik text-base text-white">{address}</Text>
 
         <View className="flex flex-row items-center justify-between w-full">
           <Text className="font-rubik-extrabold text-xl text-white">
-            $2,500
+            {price}
           </Text>
           <Image source={icons.heart} className="size-5" />
         </View>
@@ -48,7 +50,9 @@ export const FeaturedCard = ({ onPress }: ICard) => {
   );
 };
 
-export const Card = ({ onPress }: ICard) => {
+export const Card = ({ item, onPress }: ICard) => {
+  const { rating, name, address, image, price } = item;
+
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -57,23 +61,19 @@ export const Card = ({ onPress }: ICard) => {
       <View className="flex flex-row items-center absolute px-2 top-5 right-5 bg-white/90 p-1 rounded-full z-50">
         <Image source={icons.star} className="size-2.5" />
         <Text className="font-rubik-bold text-xs text-primary-300 ml-0.5">
-          4.4
+          {rating}
         </Text>
       </View>
 
-      <Image source={images.newYork} className="w-full h-40 rounded-lg" />
+      <Image source={{ uri: image }} className="w-full h-40 rounded-lg" />
 
       <View className="flex flex-col mt-2">
-        <Text className="font-rubik-bold text-base text-black-300">
-          Cozy Studio
-        </Text>
-        <Text className="font-rubik text-xs text-black-200">
-          22 W 15th St, New York
-        </Text>
+        <Text className="font-rubik-bold text-base text-black-300">{name}</Text>
+        <Text className="font-rubik text-xs text-black-200">{address}</Text>
 
         <View className="flex flex-row items-center justify-between mt-2">
           <Text className="font-rubik-bold text-base text-primary-30">
-            $2,500
+            {price}
           </Text>
           <Image
             source={icons.heart}
