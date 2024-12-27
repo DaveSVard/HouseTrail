@@ -41,7 +41,7 @@ export const FeaturedCard = ({ item, onPress }: ICard) => {
 
         <View className="flex flex-row items-center justify-between w-full">
           <Text className="font-rubik-extrabold text-xl text-white">
-            {price}
+            ${price}
           </Text>
           <Image source={icons.heart} className="size-5" />
         </View>
@@ -73,7 +73,7 @@ export const Card = ({ item, onPress }: ICard) => {
 
         <View className="flex flex-row items-center justify-between mt-2">
           <Text className="font-rubik-bold text-base text-primary-30">
-            {price}
+           ${price}
           </Text>
           <Image
             source={icons.heart}

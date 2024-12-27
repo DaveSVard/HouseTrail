@@ -46,7 +46,7 @@ export default function Index() {
     refetch({
       filter: params.filter!,
       query: params.query!,
-      limit: 6,
+      limit: 10,
     });
   }, [params.filter, params.query]);
 
